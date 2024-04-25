@@ -1,7 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -9,7 +10,8 @@ export default {
         primaryTitle: "#CAB86E ",
         primarySubTitle: "#CBAF4C  ",
         primaryBase: "white",
-        primaryBackground: "black",
+        primaryBackground: "#242424",
+        secondaryBackground:"#1f1f1f",
       }
     },
   },
