@@ -11,7 +11,7 @@ import { polynomialGenerator } from "../math/polynomialGenerator";
 import { problemGenerator } from "../math/problemGenerator";
 //Sample equations
 const nullEquation = "";
-const displayProblemList = problemGenerator(10);
+const displayProblemList = problemGenerator(100);
 var countScore = 0;
 var indexProblem = 0; //find a way to change problem
 const EquationInputField = () => {
@@ -50,6 +50,17 @@ const EquationInputField = () => {
                         autoFocus="autofocus" placeholder='Input your equation here.' autocomplete="off" 
                         onChange={(e) => setName(e.target.value)}
                         onKeyDown={(e) => {
+                        if (e.key === 'Enter' && e.shiftKey) {   
+                            indexProblem++;
+                            setEquation('');
+                            setProblem(displayProblemList[indexProblem]);
+                            inputRef.current.value = "";
+                            setName('');
+                            e.target.reset;
+                            console.log(inputRef.current.value);
+                            setScore(countScore);
+                            return;
+                        }
                         if (e.key === "Enter"){
 
                             //We use Functionfilter to add extra parenthesis for safe inputs (eg. sinx -> sin(x))
