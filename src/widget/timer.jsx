@@ -10,7 +10,7 @@ const Timer = ({initialTime}) => {
                 setTime((prevTime) => prevTime - 1);
             }, 1000);
         }else{
-            alert("Time out!");
+            
         }
         return () => {
             clearInterval(interval);

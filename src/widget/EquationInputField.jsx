@@ -12,7 +12,7 @@ import { problemGenerator } from "../math/problemGenerator";
 //Sample equations
 const nullEquation = "";
 const displayProblemList = problemGenerator(10);
-
+var countScore = 0;
 var indexProblem = 0; //find a way to change problem
 const EquationInputField = () => {
     const inputRef = useRef(null);
@@ -20,7 +20,7 @@ const EquationInputField = () => {
     var [form] = Form.useForm();
     var [displayProblem, setProblem] = useState(displayProblemList[0]);
     const [name, setName] = useState('');
-
+    const [score, setScore] = useState("0");
     return (
         <div class=" w-screen h-auto min-h-40 flex justify-center align-center ">
             
@@ -31,7 +31,11 @@ const EquationInputField = () => {
                 }}
                 className="bg-inherit caret-primaryTitle text-white text-3xl font-Quicksand"
             >
-                <div className="text-center mb-12 font-MonoDisplay"><Timer initialTime={60}/></div>
+                <div className="text-center mb-12 font-MonoDisplay">
+                    <Timer initialTime={60}/>
+                    <div className="text-center mb-12 font-MonoDisplay" >score {score}</div>
+                </div>
+                
                 <div className="h-20">
                     <MathJax.Context input="ascii">
                         <MathJax.Node>{"d/dx (" + displayProblem + ")  =  "}</MathJax.Node>
@@ -41,8 +45,8 @@ const EquationInputField = () => {
                     </MathJax.Context>
                 </div>
                 <Form.Item name="equation" initialValue={equation} className="bg-inherit">
-
-                <input  ref={inputRef} class="bg-inherit mt-10  caret-primaryTitle w-screen mx-36 font-MonoDisplay text-2xl text-primarySubTitle text-center focus:outline-none" 
+                <input class="text-black opacity-0" value={name}/>
+                <input value={name}  ref={inputRef} class="bg-inherit mt-10  caret-primaryTitle w-screen mx-36 font-MonoDisplay text-2xl text-primarySubTitle text-center focus:outline-none" 
                         autoFocus="autofocus" placeholder='Input your equation here.' autocomplete="off" 
                         onChange={(e) => setName(e.target.value)}
                         onKeyDown={(e) => {
@@ -64,13 +68,15 @@ const EquationInputField = () => {
                                     setName('');
                                     e.target.reset;
                                     console.log(inputRef.current.value);
+                                    countScore++;
+                                    setScore(countScore);
+
                                 });
                             } 
                             
                         }
                         
-                    }}
-                    value={name}/>
+                    }}/>
                 </Form.Item>
             </Form>
             
