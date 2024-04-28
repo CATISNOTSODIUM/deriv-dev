@@ -10,8 +10,9 @@ import Timer from "./timer";
 import { polynomialGenerator } from "../math/polynomialGenerator";
 import { problemGenerator } from "../math/problemGenerator";
 //Sample equations
+//working with resetting input
 const nullEquation = "";
-const displayProblemList = problemGenerator(100);
+var displayProblemList = problemGenerator(2);
 var countScore = 0;
 var indexProblem = 0; //find a way to change problem
 const EquationInputField = () => {
@@ -28,6 +29,7 @@ const EquationInputField = () => {
                 form={form}
                 onValuesChange={(changedValue) => {
                     setEquation(changedValue.equation);
+                    setName(changedValue.equation);
                 }}
                 className="bg-inherit caret-primaryTitle text-white text-3xl font-Quicksand"
             >
@@ -41,25 +43,30 @@ const EquationInputField = () => {
                         <MathJax.Node>{"d/dx (" + displayProblem + ")  =  "}</MathJax.Node>
                     </MathJax.Context>
                     <MathJax.Context input="ascii">
-                        <MathJax.Node>{equation}</MathJax.Node>
+                        <MathJax.Node>{name}</MathJax.Node>
                     </MathJax.Context>
                 </div>
-                <Form.Item name="equation" initialValue={equation} className="bg-inherit">
-                <input class="text-black opacity-0" value={name}/>
+                <Form.Item name="equation" initialValue={equation} className="bg-inherit" value={name}>
+                <input class="text-black opacity-0" value={name}/> 
                 <input value={name}  ref={inputRef} class="bg-inherit mt-10  caret-primaryTitle w-screen mx-36 font-MonoDisplay text-2xl text-primarySubTitle text-center focus:outline-none" 
                         autoFocus="autofocus" placeholder='Input your equation here.' autocomplete="off" 
                         onChange={(e) => setName(e.target.value)}
                         onKeyDown={(e) => {
                         if (e.key === 'Enter' && e.shiftKey) {   
-                            indexProblem++;
-                            setEquation('');
-                            setProblem(displayProblemList[indexProblem]);
-                            inputRef.current.value = "";
-                            setName('');
-                            e.target.reset;
-                            console.log(inputRef.current.value);
-                            setScore(countScore);
-                            return;
+                            unstable_batchedUpdates(() => {
+
+                                indexProblem++;
+                                setEquation('');
+                                setProblem(displayProblemList[indexProblem]);
+                                inputRef.current.value = "";
+                                setName('');
+                                e.target.reset;
+
+                                setScore(countScore);
+                                displayProblemList = displayProblemList.concat(problemGenerator(1));
+                                console.log(problemGenerator(1))
+                            });
+                           
                         }
                         if (e.key === "Enter"){
 
@@ -81,6 +88,7 @@ const EquationInputField = () => {
                                     console.log(inputRef.current.value);
                                     countScore++;
                                     setScore(countScore);
+                                    displayProblemList = displayProblemList.concat(problemGenerator(1));
 
                                 });
                             } 
