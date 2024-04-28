@@ -1,6 +1,8 @@
 const isNumeric = (string) => Number.isFinite(+string)
 
 export function functionFilter(expression) {
+
+    //Step 1: add parenthesis to functions
     let ans = expression.replaceAll("ln", "log");
     ans = ans.replace(/\s/g, "");
     let regexp = /log|sin|cos|tan|csc|sec|cot|exp/g;
@@ -14,7 +16,7 @@ export function functionFilter(expression) {
     //move from right to left
     matchesIndex.slice().reverse().forEach(
         x=>{
-            //First step: check if it is a variable or number or not
+            //check if it is a variable or number or not
             let isCharacterNumeric = isNumeric(ans[x]);
             if (ans[x]=='x'){
                 let originalString = ans;
@@ -33,7 +35,7 @@ export function functionFilter(expression) {
                         break;
                     }
                 }
-            }
+            } 
             
         }
     )

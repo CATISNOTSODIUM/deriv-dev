@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+const defaultTheme = require('tailwindcss/defaultTheme');
 export default {
   content: [
     "./index.html",
@@ -14,6 +15,10 @@ export default {
         secondaryBackground:"#1f1f1f",
       }
     },
+    fontFamily: {
+      Quicksand: ['"Quicksand"', "sans-serif"],
+      MonoDisplay: ['"Major Mono Display"', "mono"],
+    }
   },
   plugins: [],
 }

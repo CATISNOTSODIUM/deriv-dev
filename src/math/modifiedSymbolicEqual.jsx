@@ -6,7 +6,7 @@ export function modifiedSymbolicEqual(e1, e2) { //e1 and e2 are expressions
     //Level 2: test case check (now, N = 1)
     let compareExpression = evaluate(e1 + '-' + e2, {x:0.1});
 
-    if (abs(compareExpression) < threshold) return true;
+    if (Math.abs(compareExpression) < threshold) return true;
     return false;
 };
 //might change to wolfram api instead
