@@ -35,7 +35,23 @@ export function functionFilter(expression) {
                         break;
                     }
                 }
-            } 
+            } else if (ans[x] == '^'){
+                console.log("caret detected, yay");
+                let targetDigit = x + 1;
+                while (targetDigit < ans.length) {
+
+                    if (isNumeric(ans[targetDigit])) {
+                        targetDigit++;
+                    } else if (ans[targetDigit] == 'x') {
+                        let originalString = ans;
+                        ans = originalString.slice(0, x - 3) + '(' + originalString.slice(x - 3, x) + '(' + ans[targetDigit] + ')' + ')' + '^' + '(' + originalString.slice(x + 1, targetDigit) + ')' + originalString.slice(targetDigit+1);
+                        console.log(ans);
+                        break;
+                    } else {
+                        break;
+                    }
+                }
+            }
             
         }
     )

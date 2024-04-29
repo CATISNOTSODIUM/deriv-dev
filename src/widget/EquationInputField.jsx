@@ -22,8 +22,20 @@ const EquationInputField = () => {
     var [displayProblem, setProblem] = useState(displayProblemList[0]);
     const [name, setName] = useState('');
     const [score, setScore] = useState("0");
+    const [isOpen, setIsOpen] = useState("visible");
     return (
-        <div class=" w-screen h-auto min-h-40 flex justify-center align-center ">
+        <>
+        <div class="absolute inset-0 z-10 top-1/4 h-2/4 text-2xl backdrop-blur-xl"
+        style={{visibility: isOpen}}
+        onClick={() => {
+            setIsOpen("hidden");
+            console.log(isOpen);
+        }}>
+                <div class="flex flex-row h-full justify-center items-center ">
+                Click anywhere to start
+            </div>
+        </div>
+        <div class=" w-screen h-auto min-h-40 flex justify-center align-center">
             
             <Form 
                 form={form}
@@ -34,7 +46,7 @@ const EquationInputField = () => {
                 className="bg-inherit caret-primaryTitle text-white text-3xl font-Quicksand"
             >
                 <div className="text-center mb-12 font-MonoDisplay">
-                    <Timer initialTime={60}/>
+                    {(isOpen == "hidden") ? <Timer initialTime={60}/>:<>Start</>}
                     <div className="text-center mb-12 font-MonoDisplay" >score {score}</div>
                 </div>
                 
@@ -71,7 +83,7 @@ const EquationInputField = () => {
                         if (e.key === "Enter"){
 
                             //We use Functionfilter to add extra parenthesis for safe inputs (eg. sinx -> sin(x))
-                            //alert(derivative("x^2","x"));
+                            
                             //alert(functionFilter(displayProblem), 'x');
                             //alert(derivative(functionFilter(displayProblem), 'x'));
                             //alert(functionFilter(inputRef.current.value));
@@ -101,6 +113,7 @@ const EquationInputField = () => {
             
 
         </div>
+        </>
 )};
 
 //submission system
