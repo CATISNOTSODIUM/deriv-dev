@@ -4,5 +4,3 @@ DERIV-PM stands for derivative problems per minute, a minimalistic typing test w
 Most of differentiable functions can be separated as chunks. 
 <h3>Support</h3>
 Although this project was made as a side-project for my high school, there might be bugs scattered across the project and some codes might be unoptimized. Please let me know if you encounter any of those.
-
-If you wish to support further development, you can donate me <b>here</b>. 
